@@ -1,2 +1,2 @@
 # graphql-starter
-GraphQL starter using Apollo server 2.0
+GraphQL boiler plate using Apollo server 2.0

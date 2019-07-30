@@ -1,0 +1,24 @@
+{
+  "name": "graphql-starter",
+  "version": "1.0.0",
+  "description": "GraphQL boiler plate using Apollo server 2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sankalpkataria/graphql-starter.git"
+  },
+  "keywords": [
+    "graphql",
+    "apollo-server",
+    "nodejs"
+  ],
+  "author": "'sankalp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sankalpkataria/graphql-starter/issues"
+  },
+  "homepage": "https://github.com/sankalpkataria/graphql-starter#readme"
+}
