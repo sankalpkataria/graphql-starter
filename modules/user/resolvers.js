@@ -18,20 +18,20 @@ const users = [
         age: 26
     }
 ];
-export const userResolvers = {
+export const resolvers = {
     Query: {
-        user: (parent, args, ctx, info) => {
+        user: (parent, args, {auth}, info) => {
 			if (!args.id) {
                 throw new Error("User id required.")
             }
             return users.find(user => user.id === args.id);
         },
-        users: (parent, args, ctx, info) => {
+        users: (parent, args, {auth}, info) => {
             return users;
         }
     },
     Mutation: {
-        createUser: (parent, args, ctx, info) => {
+        createUser: (parent, args, {auth}, info) => {
             users.push(args);
             return "User added successfully."
         }

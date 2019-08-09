@@ -1,5 +1,5 @@
 import {types} from "./types.graphql";
-import {userResolvers} from "./resolvers";
+import {resolvers} from "./resolvers";
 
-exports.userTypeDef = types;
-exports.userResolvers = userResolvers;
+export const userTypeDef = types;
+export const userResolvers = resolvers;

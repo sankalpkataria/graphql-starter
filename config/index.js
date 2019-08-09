@@ -1,3 +1,5 @@
 import {constants} from "./constants.js";
 
-exports.constants = constants;
+module.exports = {
+	constants
+};
