@@ -4,7 +4,8 @@
   "description": "GraphQL boiler plate using Apollo server 2.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node cluster.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,21 @@
   "bugs": {
     "url": "https://github.com/sankalpkataria/graphql-starter/issues"
   },
-  "homepage": "https://github.com/sankalpkataria/graphql-starter#readme"
+  "homepage": "https://github.com/sankalpkataria/graphql-starter#readme",
+  "dependencies": {
+    "apollo-server-express": "^2.8.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "graphql": "^14.4.2",
+    "graphql-depth-limit": "^1.1.0",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.19.1",
+    "open": "^6.4.0"
+  }
 }
