@@ -6,6 +6,7 @@ import {constants} from "./config";
 export const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
+	context: async ({req}) => ({auth: req.headers.authorization}),
 	formatError: (error) => {
 		if (constants.ENV === constants.PRODUCTION) {
 			return error.message;
