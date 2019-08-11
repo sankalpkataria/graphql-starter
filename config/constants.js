@@ -1,7 +1,51 @@
+import {config} from "dotenv";
+
+const dotEnv = config();
+
+if (dotEnv.error) {
+	throw dotEnv.error;
+}
+
+const {
+	PORT,
+	ENV,
+	SECRET
+} = process.env;
+
 export const constants = {
-    PORT: 8080,
-    ENV: "development",
-    DEVELOPMENT: "development",
-	PRODUCTION: "production",
-	SECRET: "Agy%$fg74ga$+74gt77&a52*-BD73gHJ722&2#@89b7@&h%n28H83ghqe#e156#$"
+	PORT,
+	ENV,
+	SECRET,
+	ENVIRONMENTS: {
+		DEVELOPMENT: "development",
+		PRODUCTION: "production"
+	},
+	LOG_LEVELS: {
+		INFO: "info",
+		ERROR: "error",
+		DEBUG: "debug",
+	},
+	ERROR: {
+		BAD_REQUEST: {
+			TYPE: "BAD_REQUEST",
+			CODE: 400
+		},
+		NOT_FOUND: {
+			TYPE: "NOT_FOUND",
+			CODE: 404
+		},
+		INTERNAL_SERVER_ERROR: {
+			TYPE: "INTERNAL_SERVER_ERROR",
+			CODE: 500
+		},
+		UNAUTHORIZED: {
+			TYPE: "UNAUTHORIZED",
+			CODE: 403
+		},
+		UNAUTHENTICATED: {
+			TYPE: "UNAUTHENTICATED",
+			CODE: 402
+		}
+	}
+
 };

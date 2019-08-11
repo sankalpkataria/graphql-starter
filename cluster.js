@@ -3,8 +3,10 @@ import {cpus} from "os";
 import {constants} from "./config";
 
 const bootScript = "./index.js";
+const {ENV, ENVIRONMENTS} = constants;
+
 if (cluster.isMaster) {
-	const cpuCount = constants.ENV === constants.DEVELOPMENT ? 1 : cpus().length;
+	const cpuCount = ENV === ENVIRONMENTS.DEVELOPMENT ? 1 : cpus().length;
 	// fork node processes
 	for (let i = 0; i < cpuCount; i++) {
 		cluster.fork();

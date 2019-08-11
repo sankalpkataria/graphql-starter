@@ -2,13 +2,26 @@ import {ApolloServer} from "apollo-server-express";
 import depthLimit from "graphql-depth-limit";
 import {resolvers, typeDefs} from "./modules";
 import {constants} from "./config";
+import {logger} from "./errors";
+
+const {ENV, ENVIRONMENTS, ERROR, LOG_LEVELS} = constants;
 
 export const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
 	context: async ({req}) => ({auth: req.headers.authorization}),
 	formatError: (error) => {
-		if (constants.ENV === constants.PRODUCTION) {
+		logger.log(
+			LOG_LEVELS.ERROR,
+			error.message,
+			{
+				code: ERROR.INTERNAL_SERVER_ERROR.CODE,
+				type: ERROR.INTERNAL_SERVER_ERROR.TYPE,
+				time: new Date(),
+				isOperational: false
+			}
+		);
+		if (ENV === ENVIRONMENTS.PRODUCTION) {
 			return error.message;
 		}
 		return error;
@@ -24,9 +37,9 @@ export const apolloServer = new ApolloServer({
 			// Do something here
 		}
 	},
-	debug: constants.ENV !== constants.PRODUCTION,
-	introspection: constants.ENV !== constants.PRODUCTION,
-	playground: constants.ENV !== constants.PRODUCTION,
-	tracing: constants.ENV !== constants.PRODUCTION,
+	debug: ENV !== ENVIRONMENTS.PRODUCTION,
+	introspection: ENV !== ENVIRONMENTS.PRODUCTION,
+	playground: ENV !== ENVIRONMENTS.PRODUCTION,
+	tracing: ENV !== ENVIRONMENTS.PRODUCTION,
 	validationRules: [depthLimit(4)]
 });

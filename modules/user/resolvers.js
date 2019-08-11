@@ -1,3 +1,6 @@
+import {AppError} from "../../errors";
+import {constants} from "../../config";
+
 const users = [
     {
         id: "1",
@@ -18,13 +21,15 @@ const users = [
         age: 26
     }
 ];
+const {ERROR, LOG_LEVELS} = constants;
 export const resolvers = {
     Query: {
         user: (parent, args, {auth}, info) => {
-			if (!args.id) {
-                throw new Error("User id required.")
-            }
-            return users.find(user => user.id === args.id);
+            const user = users.find(user => user.id === args.id);
+			if (!user) {
+				throw new AppError(LOG_LEVELS.info, ERROR.NOT_FOUND.TYPE, "User not found.", ERROR.NOT_FOUND.CODE, true);
+			}
+			return user;
         },
         users: (parent, args, {auth}, info) => {
             return users;
