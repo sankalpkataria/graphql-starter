@@ -1,6 +1,6 @@
 import {gql} from "apollo-server-express";
 
-export const types = gql`	
+export const types = gql`
     type User {
         id: ID
         name: String
@@ -18,6 +18,7 @@ export const types = gql`
 
     extend type Mutation {
         createUser(
+            id: ID!
             name: String!
             email: String!
             age: Int!
