@@ -1,29 +1,41 @@
-import {createServer} from "http";
-import open from "open";
-import {logger} from "./errors";
-
+import cluster from "cluster";
+import {cpus} from "os";
 import {constants} from "./config";
-import {apolloServer} from "./apollo";
-import {app} from "./app";
 
-const {PORT} = constants;
-const server = createServer(app);
+const bootScript = "./server.js";
+const {ENV, ENVIRONMENTS} = constants;
 
-apolloServer.applyMiddleware({app});
-apolloServer.installSubscriptionHandlers(server);
-
-server.listen(PORT, err => {
-	if (err) {
-		return console.log(`Something went wrong: \n${err}`);
+if (cluster.isMaster) {
+	const cpuCount = ENV === ENVIRONMENTS.DEVELOPMENT ? 1 : cpus().length;
+	// fork node processes
+	for (let i = 0; i < cpuCount; i++) {
+		cluster.fork();
 	}
-	console.log(`Server is listening on port: ${PORT}`);
-	open(`http://localhost:${PORT}/graphql`);
-});
 
-process.on("unhandledRejection", error => {
-	process.exit(1);
-});
+	// listen for dying workers
+	cluster.on('exit', (worker, code, signal) => {
+		if (code !== 0 && !worker.exitedAfterDisconnect) {
+			console.log(`worker ${worker.id} crashed. Starting a new worker...`);
+			cluster.fork();
+		}
+	});
 
-process.on("exit", code => {
-	console.log(`Exiting with code: ${code}`);
-});
+	process.on('SIGUSR2', () => {
+		// delete cached modules
+		delete require.cache[require.resolve(bootScript)];
+		const workerProcesses = Object.keys(cluster.workers);
+		workerProcesses.forEach(worker => {
+			console.log(`Killing ${worker}`);
+			cluster.workers[worker].disconnect();
+			cluster.workers[worker].on("disconnect", () => {
+				console.log(`Shutdown complete for ${worker}`);
+			});
+			const newWorker = cluster.fork();
+			newWorker.on("listening", () => {
+				console.log(`New worker: ${worker} is listening now.`);
+			});
+		});
+	});
+} else {
+	require(bootScript);
+}
