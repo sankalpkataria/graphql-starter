@@ -1,23 +1,23 @@
-import {AppError} from "../../errors";
 import {constants} from "../../config";
 import users from "../../.data/user";
+import {throwNotFoundError} from "../../errors";
 
 const {ERROR, LOG_LEVELS} = constants;
 export const resolvers = {
 	Query: {
-		user: (parent, args, {auth}, info) => {
+		user: (parent, args, {authToken}, info) => {
 			const user = users.find(user => user.id === args.id);
 			if (!user) {
-				throw new AppError(LOG_LEVELS.info, ERROR.NOT_FOUND.TYPE, "User not found.", ERROR.NOT_FOUND.CODE, true);
+				throwNotFoundError("User not found.");
 			}
 			return user;
 		},
-		users: (parent, args, {auth}, info) => {
+		users: (parent, args, {authToken}, info) => {
 			return users;
 		}
 	},
 	Mutation: {
-		createUser: (parent, args, {auth}, info) => {
+		createUser: (parent, args, {authToken}, info) => {
 			users.push(args);
 			return "User added successfully."
 		}
