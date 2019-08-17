@@ -1,10 +1,10 @@
 {
   "name": "graphql-starter",
   "version": "1.0.0",
-  "description": "GraphQL boiler plate using Apollo server 2.0",
+  "description": "GraphQL boiler plate using express JS and Apollo server 2.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config jest.config.js --coverage",
     "start": "babel-node index.js"
   },
   "repository": {
@@ -33,8 +33,9 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.5.5",
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "jest": "^24.9.0",
     "nodemon": "^1.19.1",
     "open": "^6.4.0",
     "winston": "^3.2.1"
