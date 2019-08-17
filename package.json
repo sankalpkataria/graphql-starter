@@ -1,5 +1,5 @@
 {
-  "name": "graphql-starter",
+  "name": "graphql-starter-kit",
   "version": "1.0.0",
   "description": "GraphQL boiler plate using express JS and Apollo server 2.0",
   "main": "index.js",
