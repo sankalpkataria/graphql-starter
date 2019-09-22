@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import {constants} from "../config/constants";
+const mongoose = require("mongoose");
+const {constants} = require("../config");
 
 const {MONGO_URI} = constants;
 

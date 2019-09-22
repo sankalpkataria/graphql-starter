@@ -1,4 +1,4 @@
-import {config} from "dotenv";
+const {config} = require("dotenv");
 
 const dotEnv = config();
 
@@ -9,13 +9,15 @@ if (dotEnv.error) {
 const {
 	PORT,
 	ENV,
-	SECRET
+	SECRET,
+	MONGO_URI
 } = process.env;
 
-export const constants = {
+const constants = {
 	PORT,
 	ENV,
 	SECRET,
+	MONGO_URI,
 	ENVIRONMENTS: {
 		DEVELOPMENT: "development",
 		PRODUCTION: "production"
@@ -47,5 +49,8 @@ export const constants = {
 			CODE: 402
 		}
 	}
+};
 
+module.exports = {
+	constants
 };

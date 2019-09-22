@@ -1,6 +1,6 @@
-import cluster from "cluster";
-import {cpus} from "os";
-import {constants} from "./config";
+const cluster = require("cluster");
+const {cpus} = require("os");
+const {constants} = require("./config");
 
 const bootScript = "./server.js";
 const {ENV, ENVIRONMENTS} = constants;

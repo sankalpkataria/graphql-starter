@@ -1,7 +1,12 @@
-import {merge} from "lodash";
-import {userResolvers, userTypeDef} from "./user";
-import {rootTypes} from "./root.graphql";
-import {rootResolvers} from "./root.resolver";
+const {merge} = require("lodash");
+const {userResolvers, userTypeDef} = require("./user");
+const {rootTypes} = require("./root.graphql");
+const {rootResolvers} = require("./root.resolver");
 
-export const typeDefs = [rootTypes, userTypeDef];
-export const resolvers = [rootResolvers, userResolvers].reduce(merge);
+const typeDefs = [rootTypes, userTypeDef];
+const resolvers = [rootResolvers, userResolvers].reduce(merge);
+
+module.exports = {
+	typeDefs,
+	resolvers
+};

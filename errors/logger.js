@@ -1,11 +1,11 @@
-import {createLogger, format, transports} from "winston";
-import {join} from "path";
-import {constants} from "../config";
+const {createLogger, format, transports} = require("winston");
+const {join} = require("path");
+const {constants} = require("../config");
 
 const errorLogPath = join(__dirname, "/../logs");
 const {ENV, ENVIRONMENTS, LOG_LEVELS} = constants;
 
-export const logger = createLogger({
+const logger = createLogger({
 	level: LOG_LEVELS.DEBUG,
 	format: format.json(),
 	transports: [
@@ -20,3 +20,7 @@ if (ENV !== ENVIRONMENTS.PRODUCTION) {
 		level: LOG_LEVELS.INFO
 	}));
 }
+
+module.exports = {
+	logger
+};

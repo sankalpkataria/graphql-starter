@@ -1,5 +1,7 @@
-import {types} from "./types.graphql";
-import {resolvers} from "./resolvers";
+const {types} = require("./types.graphql");
+const {resolvers} = require("./resolvers");
 
-export const userTypeDef = types;
-export const userResolvers = resolvers;
+module.exports = {
+	userTypeDef: types,
+	userResolvers: resolvers
+};

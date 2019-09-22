@@ -1,4 +1,4 @@
-import {logger} from "./logger";
+const {logger} = require("./logger");
 
 function AppError(errorLevel, errorType, errorMessage, errorCode, isOperational) {
 	Error.call(this);
@@ -25,4 +25,6 @@ function AppError(errorLevel, errorType, errorMessage, errorCode, isOperational)
 
 AppError.prototype.__proto__ = Error.prototype;
 
-module.exports = {AppError};
+module.exports = {
+	AppError
+};

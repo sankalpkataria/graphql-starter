@@ -1,27 +1,27 @@
-import {Users} from "../models";
+const {Users} = require("../models");
 
-export const getUserById = (userId, selection = {}) => Users.findOne({
+const getUserById = (userId, selection = {}) => Users.findOne({
 	_id: userId
 }, selection).lean();
 
-export const getUsers = (condition = {}, selection = {}) => Users.find(condition, selection).lean();
+const getUsers = (condition = {}, selection = {}) => Users.find(condition, selection).lean();
 
-export const createUser = (userObj) => {
+const createUser = (userObj) => {
 	const user = new Users(userObj);
 	return user.save();
 };
 
-export const updateUserById = (userId, updates) => Users.updateOne({
+const updateUserById = (userId, updates) => Users.updateOne({
 	_id: userId
 }, {
 	$set: updates
 });
 
-export const updateUsers = (condition = {}, updates) => Users.updateMany(condition, {
+const updateUsers = (condition = {}, updates) => Users.updateMany(condition, {
 	$set: updates
 });
 
-export const users = {
+module.exports = {
 	getUsers,
 	getUserById,
 	createUser,

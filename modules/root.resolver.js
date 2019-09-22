@@ -1,8 +1,11 @@
-export const rootResolvers = {
+const rootResolvers = {
 	Mutation: {
 		root: () => "Mutation"
 	},
 	Query: {
 		root: () => "Query"
 	}
+};
+module.exports = {
+	rootResolvers
 };

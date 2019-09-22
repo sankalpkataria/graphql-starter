@@ -1,7 +1,7 @@
-import {resolvers} from "./resolvers";
-import {constants} from "../../config";
-import users from "../../.data/user";
-import {AppError} from "../../errors";
+const {resolvers} = require("./resolvers");
+const {constants} = require("../../config");
+const users = require("../../.data/user");
+const {AppError} = require("../../errors");
 
 const {ERROR, LOG_LEVELS} = constants;
 

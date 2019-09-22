@@ -1,12 +1,12 @@
-import {ApolloServer} from "apollo-server-express";
-import depthLimit from "graphql-depth-limit";
-import {resolvers, typeDefs} from "./modules";
-import {constants} from "./config";
-import {logger} from "./errors";
+const {ApolloServer} = require("apollo-server-express");
+const depthLimit = require("graphql-depth-limit");
+const {resolvers, typeDefs} = require("./modules");
+const {constants} = require("./config");
+const {logger} = require("./errors");
 
 const {ENV, ENVIRONMENTS, ERROR, LOG_LEVELS} = constants;
 
-export const apolloServer = new ApolloServer({
+const apolloServer = new ApolloServer({
 	typeDefs,
 	resolvers,
 	context: async ({req}) => ({authToken: req.headers.authorization}),
@@ -45,3 +45,7 @@ export const apolloServer = new ApolloServer({
 	tracing: ENV !== ENVIRONMENTS.PRODUCTION,
 	validationRules: [depthLimit(4)]
 });
+
+module.exports = {
+	apolloServer
+};
