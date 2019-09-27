@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "jest": "^24.9.0",
-    "nodemon": "^1.19.1",
     "open": "^6.4.0",
     "winston": "^3.2.1"
   }

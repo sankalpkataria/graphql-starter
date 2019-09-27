@@ -5,25 +5,37 @@ const {throwNotFoundError} = require(__basedir + "/errors");
 const {ERROR, LOG_LEVELS} = constants;
 const resolvers = {
 	Query: {
-		user: async (parent, args, {authToken}, info) => {
-			const user = await users.getUserById(args._id);
-			if (!user) {
-				throwNotFoundError("User not found.");
+		user: async (parent, args, ctx, info) => {
+			try {
+				const user = await users.getUserById(args._id);
+				if (!user) {
+					throwNotFoundError("User not found.");
+				}
+				return user;
+			} catch (e) {
+				throw e;
 			}
-			return user;
 		},
-		users: async (parent, args, {authToken}, info) => {
-			const users = await users.getUsers();
-			if (!users || !users.length) {
-				throwNotFoundError("No user found.");
+		users: async (parent, args, ctx, info) => {
+			try {
+				const userList = await users.getUsers();
+				if (!userList || !userList.length) {
+					throwNotFoundError("No user found.");
+				}
+				return userList;
+			} catch (e) {
+				throw e;
 			}
-			return users;
 		}
 	},
 	Mutation: {
-		createUser: async (parent, args, {authToken}, info) => {
-			const user = await users.createUser(args);
-			return "User added successfully."
+		createUser: async (parent, args, ctx, info) => {
+			try {
+				const user = await users.createUser(args);
+				return "User added successfully."
+			} catch (e) {
+				throw e;
+			}
 		}
 	},
 };
