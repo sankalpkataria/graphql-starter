@@ -1,7 +1,7 @@
 const {resolvers} = require("./resolvers");
-const {constants} = require("../../config");
-const users = require("../../.data/user");
-const {AppError} = require("../../errors");
+const {constants} = require(__basedir + "/config");
+const users = require(__basedir + "/.data/user");
+const {AppError} = require(__basedir + "/errors");
 
 const {ERROR, LOG_LEVELS} = constants;
 

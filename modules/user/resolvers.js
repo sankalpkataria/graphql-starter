@@ -1,6 +1,6 @@
-const {constants} = require("../../config");
-const {users} = require("../../db/operations");
-const {throwNotFoundError} = require("../../errors");
+const {constants} = require(__basedir + "/config");
+const {users} = require(__basedir + "/db/operations");
+const {throwNotFoundError} = require(__basedir + "/errors");
 
 const {ERROR, LOG_LEVELS} = constants;
 const resolvers = {

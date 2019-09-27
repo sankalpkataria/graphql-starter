@@ -1,6 +1,6 @@
 const {createLogger, format, transports} = require("winston");
 const {join} = require("path");
-const {constants} = require("../config");
+const {constants} = require(__basedir + "/config");
 
 const errorLogPath = join(__dirname, "/../logs");
 const {ENV, ENVIRONMENTS, LOG_LEVELS} = constants;

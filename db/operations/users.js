@@ -1,4 +1,4 @@
-const {Users} = require("../models");
+const {Users} = require(__basedir + "/db/models");
 
 const getUserById = (userId, selection = {}) => Users.findOne({
 	_id: userId
