@@ -6,7 +6,7 @@ const {ERROR, LOG_LEVELS} = constants;
 const resolvers = {
 	Query: {
 		user: async (parent, args, {authToken}, info) => {
-			const user = await users.getUserById(args.id);
+			const user = await users.getUserById(args._id);
 			if (!user) {
 				throwNotFoundError("User not found.");
 			}
