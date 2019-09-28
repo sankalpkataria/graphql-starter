@@ -1,8 +1,8 @@
-import express from "express";
-import cors from "cors";
-import {json, urlencoded} from "body-parser";
+const express = require("express");
+const cors = require("cors");
+const {json, urlencoded} = require("body-parser");
 
-export const app = express();
+const app = express();
 app.use(urlencoded({
 	extended: true
 }));
@@ -22,3 +22,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static("public"));
+
+module.exports = {
+	app
+};

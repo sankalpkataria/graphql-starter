@@ -1,25 +1,45 @@
-import {constants} from "../../config";
-import users from "../../.data/user";
-import {throwNotFoundError} from "../../errors";
+const {constants} = require(__basedir + "/config");
+const {users} = require(__basedir + "/db/operations");
+const {throwNotFoundError} = require(__basedir + "/errors");
 
 const {ERROR, LOG_LEVELS} = constants;
-export const resolvers = {
+const resolvers = {
 	Query: {
-		user: (parent, args, {authToken}, info) => {
-			const user = users.find(user => user.id === args.id);
-			if (!user) {
-				throwNotFoundError("User not found.");
+		user: async (parent, args, ctx, info) => {
+			try {
+				const user = await users.getUserById(args._id);
+				if (!user) {
+					throwNotFoundError("User not found.");
+				}
+				return user;
+			} catch (e) {
+				throw e;
 			}
-			return user;
 		},
-		users: (parent, args, {authToken}, info) => {
-			return users;
+		users: async (parent, args, ctx, info) => {
+			try {
+				const userList = await users.getUsers();
+				if (!userList || !userList.length) {
+					throwNotFoundError("No user found.");
+				}
+				return userList;
+			} catch (e) {
+				throw e;
+			}
 		}
 	},
 	Mutation: {
-		createUser: (parent, args, {authToken}, info) => {
-			users.push(args);
-			return "User added successfully."
+		createUser: async (parent, args, ctx, info) => {
+			try {
+				const user = await users.createUser(args);
+				return "User added successfully."
+			} catch (e) {
+				throw e;
+			}
 		}
 	},
+};
+
+module.exports = {
+	resolvers
 };

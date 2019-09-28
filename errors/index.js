@@ -1,12 +1,12 @@
-import {AppError} from "./appError";
-import {logger} from "./logger";
-import {
+const {AppError} = require("./appError");
+const {logger} = require("./logger");
+const {
 	throwBadRequestError,
 	throwInternalServerError,
 	throwUnAuthenticatedError,
 	throwUnAuthorizedError,
 	throwNotFoundError
-} from "./methods";
+} = require("./methods");
 
 module.exports = {
 	AppError,

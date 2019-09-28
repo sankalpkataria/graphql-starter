@@ -1,12 +1,15 @@
-import {createServer} from "http";
-import open from "open";
-import {logger} from "./errors";
-
-import {constants} from "./config";
-import {apolloServer} from "./apollo";
-import {app} from "./app";
+const {createServer} = require("http");
+const open = require("open");
+const {logger} = require("./errors");
+const {constants} = require("./config");
+const {apolloServer} = require("./apollo");
+const {app} = require("./app");
+const {connectToMongoDb} = require("./db/connection");
 
 const {PORT} = constants;
+
+connectToMongoDb();
+
 const server = createServer(app);
 
 apolloServer.applyMiddleware({app});
