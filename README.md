@@ -13,6 +13,7 @@ GraphQL boiler plate using express JS and Apollo server 2.0
 PORT=<Port of your choice>
 ENV=<Environment development/production>
 SECRET=<Some secure secret>
+MONGO_URI=<Mongo db URI>
 ```
 * Run `npm start` to run the server.
 
