@@ -1,0 +1,10 @@
+{
+	"name": "graphql-starter-kit",
+	"version": 1,
+	"env": {
+		"PORT": 8080,
+		"ENV": "development",
+		"SECRET": "someLongSecret",
+		"MONGO_URI": "mongodb://localhost:27017/demo"
+	}
+}
