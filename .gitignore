@@ -4,4 +4,3 @@ logs
 package-lock.json
 .env
 coverage
-now.json
