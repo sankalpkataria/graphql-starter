@@ -1,38 +1,46 @@
-const {constants} = require(__basedir + "/config");
 const {users} = require(__basedir + "/db/operations");
 const {throwNotFoundError} = require(__basedir + "/errors");
+const {createToken, authenticateUserWithToken} = require(__basedir + "/lib");
 
-const {ERROR, LOG_LEVELS} = constants;
 const resolvers = {
 	Query: {
-		user: async (parent, args, ctx, info) => {
+		user: async (parent, args, {authToken}) => {
 			try {
-				const user = await users.getUserById(args._id);
-				if (!user) {
+				const user = await authenticateUserWithToken(authToken);
+				const userObj = await users.getUserById(user._id);
+				if (!userObj) {
 					throwNotFoundError("User not found.");
 				}
-				return user;
+				return userObj;
 			} catch (e) {
 				throw e;
 			}
 		},
-		users: async (parent, args, ctx, info) => {
+		getToken: async (parent, {email}) => {
 			try {
-				const userList = await users.getUsers();
-				if (!userList || !userList.length) {
-					throwNotFoundError("No user found.");
+				const user = await users.getUser({email});
+				if (!user) {
+					throwNotFoundError("User not found.");
 				}
-				return userList;
+				const token = await createToken(user);
+				return {
+					user,
+					token
+				};
 			} catch (e) {
 				throw e;
 			}
 		}
 	},
 	Mutation: {
-		createUser: async (parent, args, ctx, info) => {
+		createUser: async (parent, args) => {
 			try {
 				const user = await users.createUser(args);
-				return "User added successfully."
+				const token = await createToken(user);
+				return {
+					user,
+					token
+				};
 			} catch (e) {
 				throw e;
 			}

@@ -7,13 +7,15 @@ const types = gql`
         email: String
         age: Int
     }
+	
+	type UserToken {
+		user: User
+		token: String
+	}
 
     extend type Query {
-        user (
-            _id: ID!
-        ): User
-
-        users: [User]
+        user: User
+        getToken(email: String!): UserToken
     }
 
     extend type Mutation {
@@ -21,7 +23,7 @@ const types = gql`
             name: String!
             email: String!
             age: Int!
-        ): String
+        ): UserToken
     }
 `;
 

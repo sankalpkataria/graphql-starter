@@ -2,7 +2,7 @@ const {createLogger, format, transports} = require("winston");
 const {join} = require("path");
 const {constants} = require(__basedir + "/config");
 
-const errorLogPath = join(__dirname, "/../logs");
+const errorLogPath = join(__basedir, "/logs");
 const {ENV, ENVIRONMENTS, LOG_LEVELS} = constants;
 
 const logger = createLogger({
@@ -14,7 +14,7 @@ const logger = createLogger({
 	]
 });
 
-if (ENV !== ENVIRONMENTS.PRODUCTION) {
+if (ENV === ENVIRONMENTS.DEVELOPMENT) {
 	logger.add(new transports.Console({
 		format: format.simple(),
 		level: LOG_LEVELS.INFO
