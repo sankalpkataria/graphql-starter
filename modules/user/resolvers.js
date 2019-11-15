@@ -15,6 +15,21 @@ const resolvers = {
 			} catch (e) {
 				throw e;
 			}
+		},
+		getToken: async (parent, {email}) => {
+			try {
+				const user = await users.getUser({email});
+				if (!user) {
+					throwNotFoundError("User not found.");
+				}
+				const token = await createToken(user);
+				return {
+					user,
+					token
+				};
+			} catch (e) {
+				throw e;
+			}
 		}
 	},
 	Mutation: {

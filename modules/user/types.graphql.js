@@ -15,6 +15,7 @@ const types = gql`
 
     extend type Query {
         user: User
+        getToken(email: String!): UserToken
     }
 
     extend type Mutation {

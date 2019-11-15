@@ -4,6 +4,8 @@ const getUserById = (userId, selection = {}) => Users.findOne({
 	_id: userId
 }, selection).lean();
 
+const getUser = (condition, selection = {}) => Users.findOne(condition, selection).lean();
+
 const getUsers = (condition = {}, selection = {}) => Users.find(condition, selection).lean();
 
 const createUser = (userObj) => {
@@ -22,6 +24,7 @@ const updateUsers = (condition = {}, updates) => Users.updateMany(condition, {
 });
 
 module.exports = {
+	getUser,
 	getUsers,
 	getUserById,
 	createUser,
