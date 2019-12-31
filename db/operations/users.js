@@ -1,7 +1,7 @@
-const {Users} = require(__basedir + "/db/models");
+const { Users } = require(__basedir + "/db/models");
 
 const getUserById = (userId, selection = {}) => Users.findOne({
-	_id: userId
+    _id: userId
 }, selection).lean();
 
 const getUser = (condition, selection = {}) => Users.findOne(condition, selection).lean();
@@ -9,25 +9,25 @@ const getUser = (condition, selection = {}) => Users.findOne(condition, selectio
 const getUsers = (condition = {}, selection = {}) => Users.find(condition, selection).lean();
 
 const createUser = (userObj) => {
-	const user = new Users(userObj);
-	return user.save();
+    const user = new Users(userObj);
+    return user.save();
 };
 
 const updateUserById = (userId, updates) => Users.updateOne({
-	_id: userId
+    _id: userId
 }, {
-	$set: updates
+    $set: updates
 });
 
 const updateUsers = (condition = {}, updates) => Users.updateMany(condition, {
-	$set: updates
+    $set: updates
 });
 
 module.exports = {
-	getUser,
-	getUsers,
-	getUserById,
-	createUser,
-	updateUsers,
-	updateUserById
+    getUser,
+    getUsers,
+    getUserById,
+    createUser,
+    updateUsers,
+    updateUserById
 };

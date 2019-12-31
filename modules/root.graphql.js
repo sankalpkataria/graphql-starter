@@ -1,4 +1,4 @@
-const {gql} = require("apollo-server-express");
+const { gql } = require("apollo-server-express");
 
 const rootTypes = gql`
     type Mutation {
@@ -11,5 +11,5 @@ const rootTypes = gql`
 `;
 
 module.exports = {
-	rootTypes
+    rootTypes
 };
