@@ -1,9 +1,9 @@
 const rootResolvers = {
     Mutation: {
-        root: () => "Mutation"
+        welcome: () => "Welcome to GraphQL Starter Kit"
     },
     Query: {
-        root: () => "Query"
+        appName: () => "GraphQL starter kit"
     }
 };
 module.exports = {

@@ -14,7 +14,7 @@ if (cluster.isMaster) {
     }
 
     // listen for dying workers
-    cluster.on('exit', (worker, code, signal) => {
+    cluster.on('exit', (worker, code) => {
         if (code !== 0 && !worker.exitedAfterDisconnect) {
             console.log(`worker ${worker.id} crashed. Starting a new worker...`);
             cluster.fork();

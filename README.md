@@ -1,9 +1,9 @@
-# graphql-starter
+# graphql-starter-kit
 GraphQL boiler plate using express JS and Apollo server 2.0
 
 ### Prerequisites
 ```
-    node
+    node, mongoDb
 ```
 
 ### Usage

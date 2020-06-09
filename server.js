@@ -1,6 +1,5 @@
 const { createServer } = require("http");
 const open = require("open");
-const { logger } = require("./errors");
 const { constants } = require("./config");
 const { apolloServer } = require("./apollo");
 const { app } = require("./app");
@@ -24,6 +23,7 @@ server.listen(PORT, err => {
 });
 
 process.on("unhandledRejection", error => {
+    console.error(error);
     process.exit(1);
 });
 

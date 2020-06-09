@@ -11,21 +11,22 @@ const apolloServer = new ApolloServer({
     resolvers,
     context: async ({ req }) => ({ authToken: req.headers.authorization }),
     formatError: (error) => {
-        if (!error.extensions || !error.extensions.exception || !error.extensions.exception.type) {
-            logger.log(
-                LOG_LEVELS.ERROR,
-                error.message,
-                {
-                    code: ERROR.INTERNAL_SERVER_ERROR.CODE,
-                    type: ERROR.INTERNAL_SERVER_ERROR.TYPE,
-                    time: new Date(),
-                    isOperational: false
-                }
-            );
+        if (error.extensions && error.extensions.exception && error.extensions.exception.type) {
+            if (ENV === ENVIRONMENTS.PRODUCTION) {
+                delete error.extensions.exception.stacktrace;
+            }
+            return error.extensions.exception;
         }
-        if (ENV === ENVIRONMENTS.PRODUCTION) {
-            return error.message;
-        }
+        logger.log(
+            LOG_LEVELS.ERROR,
+            error.message,
+            {
+                code: ERROR.INTERNAL_SERVER_ERROR.CODE,
+                type: ERROR.INTERNAL_SERVER_ERROR.TYPE,
+                time: new Date(),
+                isOperational: false
+            }
+        );
         return error;
     },
     schemaDirectives: {
